@@ -1,0 +1,1397 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroFocus | Attention Training</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<style>
+:root {
+  --bg: #050914;
+  --panel: #0c1528;
+  --panel2: #111e35;
+  --cyan: #45e5ff;
+  --purple: #a58bff;
+  --green: #67f0b0;
+  --orange: #ffb45e;
+  --red: #ff6d85;
+  --text: #eaf2ff;
+  --muted: #91a3c1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 17px;
+  color: #06101d;
+  background: var(--cyan);
+  font-weight: 700;
+  transition: .2s;
+}
+
+button:hover { filter: brightness(1.15); transform: translateY(-1px); }
+button:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+button.secondary {
+  color: var(--text);
+  background: #23334f;
+  border: 1px solid #344765;
+}
+
+button.danger {
+  background: #54243a;
+  color: #ffdce5;
+}
+
+button.small {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+header {
+  padding: 20px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #1a2943;
+  background: rgba(5,9,20,.95);
+  gap: 12px;
+}
+
+.brand {
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.brand span { color: var(--cyan); }
+
+.subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+  letter-spacing: 1.5px;
+}
+
+.header-tag {
+  color: var(--cyan);
+  font-size: 12px;
+  border: 1px solid #24566b;
+  border-radius: 20px;
+  padding: 7px 12px;
+}
+
+main {
+  max-width: 1450px;
+  margin: auto;
+  padding: 24px;
+}
+
+h1 { font-size: 28px; margin: 0 0 8px; }
+h2 { font-size: 19px; margin: 0 0 15px; }
+h3 { font-size: 15px; margin: 0 0 10px; }
+
+p {
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid #1b2b47;
+  border-radius: 15px;
+  padding: 19px;
+}
+
+.intro { margin-bottom: 22px; }
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 20px 0;
+}
+
+.game-card {
+  background: var(--panel);
+  border: 1px solid #253752;
+  border-radius: 14px;
+  padding: 18px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.game-card:hover { border-color: var(--cyan); }
+.game-card.active {
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(69,229,255,.12);
+  background: #0e1b30;
+}
+
+.game-number {
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.game-card h3 { margin-top: 10px; font-size: 17px; }
+.game-card p { font-size: 13px; margin-bottom: 0; }
+
+.settings {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(130px, 1fr));
+  gap: 16px;
+}
+
+.field label {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+select, input[type="range"] {
+  width: 100%;
+}
+
+select {
+  color: var(--text);
+  background: #14223a;
+  border: 1px solid #304360;
+  padding: 11px;
+  border-radius: 8px;
+}
+
+input[type="range"] { accent-color: var(--cyan); }
+
+.range-value {
+  color: var(--cyan);
+  font-weight: 700;
+  font-size: 13px;
+  float: right;
+}
+
+#modeFields {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #24344f;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+#gameScreen { display: none; }
+
+.game-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 13px;
+}
+
+.stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  background: #111e34;
+  border: 1px solid #263b59;
+  border-radius: 9px;
+  padding: 9px 13px;
+  min-width: 85px;
+}
+
+.stat small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-bottom: 4px;
+}
+
+.stat strong { font-size: 17px; }
+
+#stage {
+  width: 100%;
+  height: min(62vh, 600px);
+  min-height: 360px;
+  background: #030813;
+  border: 1px solid #20334f;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  touch-action: manipulation;
+}
+
+#stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#instruction {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  background: rgba(5,12,26,.83);
+  border: 1px solid #34516d;
+  border-radius: 10px;
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 14px;
+  max-width: 90%;
+  pointer-events: none;
+}
+
+#feedback {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-size: 14px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.game-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.control-group { display: flex; gap: 9px; flex-wrap: wrap; }
+
+#soundButton {
+  display: none;
+  background: var(--orange);
+}
+
+#resultScreen {
+  display: none;
+  margin-top: 20px;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.result-card {
+  background: #111e34;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #293d5b;
+}
+
+.result-card small { color: var(--muted); display: block; }
+.result-card strong { font-size: 23px; display: block; margin-top: 7px; }
+
+.history-list {
+  max-height: 250px;
+  overflow: auto;
+  margin-top: 12px;
+}
+
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #23344e;
+  padding: 10px 0;
+  font-size: 13px;
+}
+
+.hidden { display: none !important; }
+
+footer {
+  text-align: center;
+  color: #657895;
+  font-size: 11px;
+  padding: 30px 15px;
+}
+
+@media(max-width: 850px) {
+  .game-grid { grid-template-columns: 1fr; }
+  .settings { grid-template-columns: repeat(2, 1fr); }
+  .result-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media(max-width: 500px) {
+  header { padding: 15px; }
+  main { padding: 14px; }
+  .settings { grid-template-columns: 1fr 1fr; gap: 12px; }
+  #stage { min-height: 340px; height: 52vh; }
+  .stat { min-width: 70px; padding: 8px; }
+  .stat strong { font-size: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <div class="brand">NEURO<span>FOCUS</span></div>
+    <div class="subtitle">ATTENTION & CONCENTRATION TRAINING</div>
+  </div>
+  <div class="header-tag">DOMAIN 01</div>
+</header>
+
+<main>
+
+<section id="homeScreen">
+  <div class="intro">
+    <h1>Attention Training</h1>
+    <p>Interactive 3D exercises designed to train different aspects of attention and concentration.</p>
+  </div>
+
+  <h2>Select a training exercise</h2>
+
+  <div class="game-grid">
+    <div class="game-card active" data-game="hunter" onclick="selectGame('hunter')">
+      <div class="game-number">GAME 01</div>
+      <h3>Target Hunter</h3>
+      <p>Find and respond to designated targets among surrounding objects. Trains sustained and selective attention.</p>
+    </div>
+
+    <div class="game-card" data-game="detective" onclick="selectGame('detective')">
+      <div class="game-number">GAME 02</div>
+      <h3>Visual Detective</h3>
+      <p>Locate a target in a dynamic 3D environment. Train visual search and motion discrimination.</p>
+    </div>
+
+    <div class="game-card" data-game="switch" onclick="selectGame('switch')">
+      <div class="game-number">GAME 03</div>
+      <h3>Rule Switch</h3>
+      <p>Change between visual rules or coordinate visual and auditory responses.</p>
+    </div>
+  </div>
+
+  <section class="panel">
+    <h2>Training settings</h2>
+
+    <div class="settings">
+      <div class="field">
+        <label for="difficulty">Difficulty level</label>
+        <select id="difficulty">
+          <option value="1">Level 1 – Very Easy</option>
+          <option value="2">Level 2 – Easy</option>
+          <option value="3">Level 3 – Moderate</option>
+          <option value="4" selected>Level 4 – Intermediate</option>
+          <option value="5">Level 5 – Challenging</option>
+          <option value="6">Level 6 – Hard</option>
+          <option value="7">Level 7 – Very Hard</option>
+          <option value="8">Level 8 – Advanced</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="duration">Session duration</label>
+        <select id="duration">
+          <option value="3">3 minutes</option>
+          <option value="5" selected>5 minutes</option>
+          <option value="10">10 minutes</option>
+          <option value="15">15 minutes</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="quantity">Object quantity</label>
+        <select id="quantity">
+          <option value="low">Low</option>
+          <option value="medium" selected>Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="targetSize">Target size</label>
+        <select id="targetSize">
+          <option value="large">Large</option>
+          <option value="medium" selected>Medium</option>
+          <option value="small">Small</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="speed">Movement speed <span class="range-value" id="speedValue">4</span></label>
+        <input id="speed" type="range" min="1" max="8" value="4"
+          oninput="document.getElementById('speedValue').textContent=this.value">
+      </div>
+    </div>
+
+    <div id="modeFields">
+      <div id="detectiveSettings" class="hidden">
+        <h3>Visual Detective mode</h3>
+        <div class="settings">
+          <div class="field">
+            <label for="detectiveMode">Target movement</label>
+            <select id="detectiveMode">
+              <option value="stationary">Stationary target + moving background</option>
+              <option value="moving" selected>Moving target + moving background</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="targetSpeed">Target speed <span class="range-value" id="targetSpeedValue">4</span></label>
+            <input id="targetSpeed" type="range" min="1" max="8" value="4"
+              oninput="document.getElementById('targetSpeedValue').textContent=this.value">
+          </div>
+          <div class="field">
+            <label for="backgroundSpeed">Background speed <span class="range-value" id="backgroundSpeedValue">4</span></label>
+            <input id="backgroundSpeed" type="range" min="1" max="8" value="4"
+              oninput="document.getElementById('backgroundSpeedValue').textContent=this.value">
+          </div>
+        </div>
+      </div>
+
+      <div id="switchSettings" class="hidden">
+        <h3>Rule Switch mode</h3>
+        <div class="field" style="max-width:350px">
+          <label for="switchMode">Training mode</label>
+          <select id="switchMode">
+            <option value="alternating">Alternating attention – change visual rules</option>
+            <option value="divided">Divided attention – visual + auditory task</option>
+          </select>
+        </div>
+        <p id="switchDescription">Respond to the current visual rule. The rule will change during the session.</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button onclick="startGame()">Start training</button>
+      <button class="secondary" onclick="toggleHistory()">Session history</button>
+      <button class="secondary" onclick="toggleFullscreen()">Full screen</button>
+    </div>
+  </section>
+
+  <section class="panel" id="historyPanel" style="display:none;margin-top:18px">
+    <h2>Local session history</h2>
+    <p>Session records are saved on this browser and device only.</p>
+    <div id="historyList" class="history-list"></div>
+    <button class="danger small" onclick="clearHistory()">Clear history</button>
+  </section>
+</section>
+
+<section id="gameScreen">
+  <div class="game-topbar">
+    <div>
+      <h2 id="gameTitle">Target Hunter</h2>
+      <p id="gameSubtitle" style="margin:3px 0">Find the target</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><small>TIME LEFT</small><strong id="timer">05:00</strong></div>
+      <div class="stat"><small>CORRECT</small><strong id="correct">0</strong></div>
+      <div class="stat"><small>MISSED</small><strong id="missed">0</strong></div>
+      <div class="stat"><small>FALSE ALARMS</small><strong id="falseAlarms">0</strong></div>
+    </div>
+  </div>
+
+  <div id="stage">
+    <div id="instruction">Find the target and tap it</div>
+    <div id="feedback"></div>
+  </div>
+
+  <div class="game-controls">
+    <div class="control-group">
+      <button class="secondary" id="pauseButton" onclick="togglePause()">Pause</button>
+      <button class="secondary" onclick="restartGame()">Restart</button>
+      <button class="danger" onclick="endGame()">End session</button>
+    </div>
+    <div class="control-group">
+      <button id="soundButton" onclick="respondToSound()">I heard it</button>
+    </div>
+  </div>
+  <p id="statusText">Select the correct target to respond.</p>
+</section>
+
+<section id="resultScreen" class="panel">
+  <h2>Session complete</h2>
+  <p id="resultDescription">Your training session has finished.</p>
+
+  <div class="result-grid">
+    <div class="result-card"><small>Correct responses</small><strong id="resultCorrect">0</strong></div>
+    <div class="result-card"><small>Missed targets</small><strong id="resultMissed">0</strong></div>
+    <div class="result-card"><small>False alarms</small><strong id="resultFalse">0</strong></div>
+    <div class="result-card"><small>Average response</small><strong id="resultRT">—</strong></div>
+  </div>
+
+  <p id="resultAccuracy"></p>
+  <div class="actions">
+    <button onclick="backHome()">Back to exercises</button>
+    <button class="secondary" onclick="restartGame()">Repeat session</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  NeuroFocus · Attention & Concentration Training · Domain 01
+  <br><br>
+  Training feedback is not a diagnostic score or a substitute for clinical assessment.
+</footer>
+
+<script>
+/* =========================================================
+   NEUROFOCUS
+   Domain 1: Attention and Concentration
+   Single-file training application
+   ========================================================= */
+
+let selectedGame = "hunter";
+let selectedSwitchMode = "alternating";
+
+let scene, camera, renderer, raycaster, pointer;
+let objects = [];
+let animationId = null;
+let lastFrame = 0;
+
+let running = false;
+let paused = false;
+let finished = false;
+let timerInterval = null;
+let sessionSeconds = 0;
+let remainingSeconds = 0;
+let sessionStart = 0;
+
+let stats = {
+  correct: 0,
+  missed: 0,
+  falseAlarms: 0,
+  reactionTimes: [],
+  soundsCorrect: 0,
+  soundsMissed: 0
+};
+
+let config = {};
+let currentRule = "color";
+let ruleTimer = 0;
+let soundDue = false;
+let soundTimer = 0;
+let soundDeadline = 0;
+let lastSoundTime = 0;
+let audioContext = null;
+let feedbackTimeout = null;
+
+const COLORS = [
+  0x45e5ff,
+  0xa58bff,
+  0x67f0b0,
+  0xffb45e,
+  0xff6d85,
+  0x6b9dff
+];
+
+const COLOR_NAMES = ["cyan", "purple", "green", "orange", "pink", "blue"];
+
+function selectGame(game) {
+  selectedGame = game;
+
+  document.querySelectorAll(".game-card").forEach(card => {
+    card.classList.toggle("active", card.dataset.game === game);
+  });
+
+  document.getElementById("detectiveSettings").classList.toggle("hidden", game !== "detective");
+  document.getElementById("switchSettings").classList.toggle("hidden", game !== "switch");
+
+  if (game === "hunter") {
+    document.getElementById("gameTitle").textContent = "Target Hunter";
+  }
+
+  if (game === "detective") {
+    document.getElementById("gameTitle").textContent = "Visual Detective";
+  }
+
+  if (game === "switch") {
+    document.getElementById("gameTitle").textContent = "Rule Switch";
+  }
+}
+
+document.getElementById("switchMode").addEventListener("change", function() {
+  selectedSwitchMode = this.value;
+  document.getElementById("switchDescription").textContent =
+    this.value === "alternating"
+    ? "Respond to the current visual rule. The rule will change during the session."
+    : "Respond to visual targets and press the auditory response button whenever you hear a tone.";
+});
+
+function readConfig() {
+  const difficulty = Number(document.getElementById("difficulty").value);
+  const quantity = document.getElementById("quantity").value;
+
+  const counts = { low: 6, medium: 10, high: 15 };
+  const sizeScale = { large: 1.25, medium: 1, small: 0.72 };
+
+  return {
+    difficulty,
+    duration: Number(document.getElementById("duration").value) * 60,
+    quantity: counts[quantity],
+    targetScale: sizeScale[document.getElementById("targetSize").value],
+    speed: Number(document.getElementById("speed").value),
+    detectiveMode: document.getElementById("detectiveMode").value,
+    targetSpeed: Number(document.getElementById("targetSpeed").value),
+    backgroundSpeed: Number(document.getElementById("backgroundSpeed").value),
+    switchMode: document.getElementById("switchMode").value
+  };
+}
+
+function startGame() {
+  if (!window.THREE) {
+    alert("The 3D library could not load. Please check your internet connection and refresh the page.");
+    return;
+  }
+
+  config = readConfig();
+  stats = {
+    correct: 0,
+    missed: 0,
+    falseAlarms: 0,
+    reactionTimes: [],
+    soundsCorrect: 0,
+    soundsMissed: 0
+  };
+
+  remainingSeconds = config.duration;
+  sessionSeconds = config.duration;
+  sessionStart = Date.now();
+  running = true;
+  paused = false;
+  finished = false;
+  currentRule = "color";
+  ruleTimer = 0;
+  soundDue = false;
+  soundTimer = 0;
+
+  document.getElementById("homeScreen").style.display = "none";
+  document.getElementById("resultScreen").style.display = "none";
+  document.getElementById("gameScreen").style.display = "block";
+
+  document.getElementById("correct").textContent = "0";
+  document.getElementById("missed").textContent = "0";
+  document.getElementById("falseAlarms").textContent = "0";
+  document.getElementById("pauseButton").textContent = "Pause";
+  document.getElementById("soundButton").style.display =
+    selectedGame === "switch" && config.switchMode === "divided" ? "inline-block" : "none";
+
+  setupGameText();
+  createScene();
+  createObjects();
+  updateInstruction();
+
+  if (timerInterval) clearInterval(timerInterval);
+
+  timerInterval = setInterval(() => {
+    if (!running || paused || finished) return;
+
+    remainingSeconds--;
+    updateTimer();
+
+    if (remainingSeconds <= 0) endGame();
+  }, 1000);
+
+  if (animationId) cancelAnimationFrame(animationId);
+  lastFrame = performance.now();
+  animate();
+}
+
+function setupGameText() {
+  const titles = {
+    hunter: ["Target Hunter", "Find and respond to the designated target."],
+    detective: ["Visual Detective", "Locate the target in a moving environment."],
+    switch: ["Rule Switch", config.switchMode === "alternating"
+      ? "Follow the changing visual rule."
+      : "Respond to visual targets and auditory tones."]
+  };
+
+  document.getElementById("gameTitle").textContent = titles[selectedGame][0];
+  document.getElementById("gameSubtitle").textContent = titles[selectedGame][1];
+
+  if (selectedGame === "hunter") {
+    document.getElementById("statusText").textContent = "Tap the designated target. Avoid tapping other objects.";
+  } else if (selectedGame === "detective") {
+    document.getElementById("statusText").textContent = "Find the target and tap it.";
+  } else if (config.switchMode === "alternating") {
+    document.getElementById("statusText").textContent = "Follow the current rule shown above the 3D environment.";
+  } else {
+    document.getElementById("statusText").textContent = "Tap visual targets and press the auditory response button when you hear a tone.";
+  }
+}
+
+function createScene() {
+  const stage = document.getElementById("stage");
+
+  if (renderer) {
+    renderer.dispose();
+    if (renderer.domElement.parentNode) renderer.domElement.remove();
+  }
+
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x030813);
+  scene.fog = new THREE.FogExp2(0x030813, 0.025);
+
+  const width = stage.clientWidth;
+  const height = stage.clientHeight;
+
+  camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 100);
+  camera.position.set(0, 0, 17);
+  camera.lookAt(0, 0, 0);
+
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(width, height);
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  stage.insertBefore(renderer.domElement, stage.firstChild);
+
+  raycaster = new THREE.Raycaster();
+  pointer = new THREE.Vector2();
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.85));
+
+  const light1 = new THREE.PointLight(0x45e5ff, 1.7, 35);
+  light1.position.set(-6, 5, 8);
+  scene.add(light1);
+
+  const light2 = new THREE.PointLight(0x8d6aff, 1.4, 35);
+  light2.position.set(6, -5, 5);
+  scene.add(light2);
+
+  // Subtle star field
+  const starGeometry = new THREE.BufferGeometry();
+  const starPositions = [];
+
+  for (let i = 0; i < 500; i++) {
+    starPositions.push(
+      (Math.random() - 0.5) * 45,
+      (Math.random() - 0.5) * 30,
+      (Math.random() - 0.5) * 18
+    );
+  }
+
+  starGeometry.setAttribute(
+    "position",
+    new THREE.Float32BufferAttribute(starPositions, 3)
+  );
+
+  const stars = new THREE.Points(
+    starGeometry,
+    new THREE.PointsMaterial({
+      color: 0x607da8,
+      size: 0.035,
+      transparent: true,
+      opacity: 0.65
+    })
+  );
+
+  scene.add(stars);
+
+  window.addEventListener("resize", resizeScene);
+  renderer.domElement.addEventListener("pointerdown", handlePointer);
+}
+
+function resizeScene() {
+  if (!renderer || !camera) return;
+
+  const stage = document.getElementById("stage");
+  const width = stage.clientWidth;
+  const height = stage.clientHeight;
+
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height);
+}
+
+function makeGeometry(type, size) {
+  if (type === "sphere") return new THREE.SphereGeometry(size, 24, 24);
+  if (type === "box") return new THREE.BoxGeometry(size * 1.6, size * 1.6, size * 1.6);
+  if (type === "cone") return new THREE.ConeGeometry(size, size * 2, 24);
+  if (type === "torus") return new THREE.TorusGeometry(size * 0.8, size * 0.25, 12, 28);
+  if (type === "octahedron") return new THREE.OctahedronGeometry(size * 1.2);
+  return new THREE.IcosahedronGeometry(size);
+}
+
+function randomShape() {
+  const shapes = ["sphere", "box", "cone", "torus", "octahedron"];
+  return shapes[Math.floor(Math.random() * shapes.length)];
+}
+
+function createOneObject(index, isTarget = false) {
+  const shapes = randomShape();
+  const baseSize = isTarget ? 0.65 : 0.48;
+  const size = baseSize * config.targetScale;
+
+  let color;
+
+  if (selectedGame === "switch" && config.switchMode === "alternating") {
+    color = isTarget ? 0x45e5ff : COLORS[Math.floor(Math.random() * COLORS.length)];
+  } else if (selectedGame === "switch" && config.switchMode === "divided") {
+    color = isTarget ? 0xffb45e : COLORS[Math.floor(Math.random() * COLORS.length)];
+  } else {
+    color = isTarget ? 0x45e5ff : COLORS[Math.floor(Math.random() * COLORS.length)];
+  }
+
+  const material = new THREE.MeshStandardMaterial({
+    color,
+    emissive: color,
+    emissiveIntensity: isTarget ? 0.75 : 0.38,
+    roughness: 0.32,
+    metalness: 0.28
+  });
+
+  const mesh = new THREE.Mesh(makeGeometry(shapes, size), material);
+
+  mesh.position.set(
+    (Math.random() - 0.5) * 13,
+    (Math.random() - 0.5) * 8,
+    (Math.random() - 0.5) * 5
+  );
+
+  mesh.userData = {
+    isTarget,
+    shape: shapes,
+    color,
+    baseX: mesh.position.x,
+    baseY: mesh.position.y,
+    baseZ: mesh.position.z,
+    phase: Math.random() * Math.PI * 2,
+    rotationSpeed: (Math.random() - 0.5) * 1.5,
+    moveX: (Math.random() - 0.5),
+    moveY: (Math.random() - 0.5),
+    targetBorn: performance.now(),
+    targetSpeed: config.targetSpeed
+  };
+
+  if (isTarget) {
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(size * 1.3, 0.045, 10, 36),
+      new THREE.MeshBasicMaterial({
+        color: 0x9ff5ff,
+        transparent: true,
+        opacity: 0.85
+      })
+    );
+    mesh.add(ring);
+  }
+
+  scene.add(mesh);
+  objects.push(mesh);
+  return mesh;
+}
+
+function createObjects() {
+  objects = [];
+
+  const count = config.quantity;
+  const target = createOneObject(0, true);
+
+  if (selectedGame === "detective" && config.detectiveMode === "stationary") {
+    target.position.set(0, 0, 0);
+    target.userData.baseX = 0;
+    target.userData.baseY = 0;
+  }
+
+  for (let i = 1; i < count; i++) {
+    createOneObject(i, false);
+  }
+
+  if (selectedGame === "switch" && config.switchMode === "alternating") {
+    applyRule();
+  }
+}
+
+function updateInstruction() {
+  const instruction = document.getElementById("instruction");
+
+  if (selectedGame === "hunter") {
+    instruction.innerHTML = 'Find the <span style="color:#45e5ff">glowing cyan target</span>';
+  } else if (selectedGame === "detective") {
+    instruction.innerHTML = 'Locate the <span style="color:#45e5ff">glowing target</span>';
+  } else if (config.switchMode === "alternating") {
+    applyRule();
+  } else {
+    instruction.innerHTML = 'Tap the <span style="color:#ffb45e">orange target</span> and respond to the sound';
+  }
+}
+
+function applyRule() {
+  if (selectedGame !== "switch" || config.switchMode !== "alternating") return;
+
+  const rules = [
+    { type: "color", name: "CYAN OBJECTS", color: 0x45e5ff },
+    { type: "shape", name: "SPHERES", shape: "sphere" },
+    { type: "color", name: "PURPLE OBJECTS", color: 0xa58bff },
+    { type: "shape", name: "CUBES", shape: "box" }
+  ];
+
+  const ruleIndex = Math.floor(ruleTimer / 12) % rules.length;
+  currentRule = rules[ruleIndex].type;
+  const rule = rules[ruleIndex];
+
+  document.getElementById("instruction").innerHTML =
+    'CURRENT RULE: <span style="color:#45e5ff">' + rule.name + '</span>';
+
+  objects.forEach(obj => {
+    const isMatch = rule.type === "color"
+      ? obj.userData.color === rule.color
+      : obj.userData.shape === rule.shape;
+
+    obj.userData.isTarget = isMatch;
+    obj.material.emissiveIntensity = isMatch ? 0.85 : 0.25;
+  });
+}
+
+function isCorrectTarget(obj) {
+  if (selectedGame === "hunter" || selectedGame === "detective") {
+    return obj.userData.isTarget;
+  }
+
+  if (selectedGame === "switch" && config.switchMode === "alternating") {
+    const rules = [
+      { type: "color", color: 0x45e5ff },
+      { type: "shape", shape: "sphere" },
+      { type: "color", color: 0xa58bff },
+      { type: "shape", shape: "box" }
+    ];
+
+    const ruleIndex = Math.floor(ruleTimer / 12) % rules.length;
+    const rule = rules[ruleIndex];
+
+    return rule.type === "color"
+      ? obj.userData.color === rule.color
+      : obj.userData.shape === rule.shape;
+  }
+
+  return obj.userData.isTarget;
+}
+
+function handlePointer(event) {
+  if (!running || paused || finished) return;
+
+  const rect = renderer.domElement.getBoundingClientRect();
+
+  pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+  raycaster.setFromCamera(pointer, camera);
+  const hits = raycaster.intersectObjects(objects, false);
+
+  if (!hits.length) return;
+
+  const object = hits[0].object;
+  processResponse(object);
+}
+
+function processResponse(obj) {
+  if (!running || paused || finished) return;
+
+  const correct = isCorrectTarget(obj);
+
+  if (correct) {
+    stats.correct++;
+    const rt = performance.now() - obj.userData.targetBorn;
+    stats.reactionTimes.push(rt);
+    showFeedback("Correct", "#67f0b0");
+    relocateObject(obj);
+  } else {
+    stats.falseAlarms++;
+    showFeedback("Try again", "#ff6d85");
+  }
+
+  updateStats();
+}
+
+function relocateObject(obj) {
+  obj.position.set(
+    (Math.random() - 0.5) * 13,
+    (Math.random() - 0.5) * 8,
+    (Math.random() - 0.5) * 5
+  );
+
+  obj.userData.baseX = obj.position.x;
+  obj.userData.baseY = obj.position.y;
+  obj.userData.baseZ = obj.position.z;
+  obj.userData.targetBorn = performance.now();
+
+  if (selectedGame === "switch" && config.switchMode === "alternating") {
+    applyRule();
+  }
+}
+
+function showFeedback(message, color) {
+  const feedback = document.getElementById("feedback");
+  feedback.textContent = message;
+  feedback.style.color = color;
+
+  if (feedbackTimeout) clearTimeout(feedbackTimeout);
+  feedbackTimeout = setTimeout(() => feedback.textContent = "", 700);
+}
+
+function updateStats() {
+  document.getElementById("correct").textContent = stats.correct;
+  document.getElementById("missed").textContent = stats.missed;
+  document.getElementById("falseAlarms").textContent = stats.falseAlarms;
+}
+
+function updateTimer() {
+  const minutes = Math.floor(remainingSeconds / 60);
+  const seconds = remainingSeconds % 60;
+  document.getElementById("timer").textContent =
+    String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
+}
+
+function animate(now = performance.now()) {
+  animationId = requestAnimationFrame(animate);
+
+  if (!renderer || !scene || !camera) return;
+
+  const delta = Math.min((now - lastFrame) / 1000, 0.05);
+  lastFrame = now;
+
+  if (running && !paused && !finished) {
+    updateObjects(delta, now);
+    updateTrainingLogic(delta);
+  }
+
+  renderer.render(scene, camera);
+}
+
+function updateObjects(delta, now) {
+  const baseSpeed = config.speed * 0.045;
+
+  objects.forEach(obj => {
+    const data = obj.userData;
+
+    obj.rotation.x += delta * data.rotationSpeed;
+    obj.rotation.y += delta * data.rotationSpeed * 0.7;
+
+    const isMovingTarget =
+      data.isTarget &&
+      selectedGame === "detective" &&
+      config.detectiveMode === "moving";
+
+    const isStationaryTarget =
+      data.isTarget &&
+      selectedGame === "detective" &&
+      config.detectiveMode === "stationary";
+
+    if (isStationaryTarget) {
+      obj.position.x = 0;
+      obj.position.y = 0;
+      return;
+    }
+
+    if (isMovingTarget) {
+      const speed = config.targetSpeed * 0.07;
+      const t = now * 0.001 * speed;
+      obj.position.x = Math.sin(t + data.phase) * 5;
+      obj.position.y = Math.cos(t * 0.75 + data.phase) * 2.5;
+      obj.position.z = Math.sin(t * 0.45) * 1.5;
+    } else {
+      const backgroundSpeed =
+        selectedGame === "detective"
+          ? config.backgroundSpeed * 0.055
+          : baseSpeed;
+
+      const t = now * 0.001 * backgroundSpeed;
+
+      obj.position.x = data.baseX + Math.sin(t + data.phase) * 0.7;
+      obj.position.y = data.baseY + Math.cos(t * 0.8 + data.phase) * 0.45;
+      obj.position.z = data.baseZ + Math.sin(t * 0.5 + data.phase) * 0.35;
+    }
+
+    const pulse = 1 + Math.sin(now * 0.002 + data.phase) * 0.035;
+    obj.scale.setScalar(pulse);
+  });
+}
+
+function updateTrainingLogic(delta) {
+  if (selectedGame === "hunter" || selectedGame === "detective") {
+    updateMissedTargets();
+  }
+
+  if (selectedGame === "switch" && config.switchMode === "alternating") {
+    const oldRule = Math.floor(ruleTimer / 12);
+    ruleTimer += delta;
+    const newRule = Math.floor(ruleTimer / 12);
+
+    if (newRule !== oldRule) applyRule();
+  }
+
+  if (selectedGame === "switch" && config.switchMode === "divided") {
+    updateSoundTask(delta);
+  }
+}
+
+function updateMissedTargets() {
+  const target = objects.find(obj => obj.userData.isTarget);
+
+  if (!target) return;
+
+  const maxTime = Math.max(4, 12 - config.difficulty * 0.7);
+  const elapsed = (performance.now() - target.userData.targetBorn) / 1000;
+
+  if (elapsed > maxTime) {
+    stats.missed++;
+    updateStats();
+    showFeedback("Target missed", "#ffb45e");
+    relocateObject(target);
+  }
+}
+
+function updateSoundTask(delta) {
+  soundTimer += delta;
+
+  if (!soundDue && soundTimer > (4 + Math.random() * 3)) {
+    playTone();
+    soundDue = true;
+    soundDeadline = performance.now() + 2200;
+    soundTimer = 0;
+    lastSoundTime = performance.now();
+    showFeedback("Listen!", "#ffb45e");
+  }
+
+  if (soundDue && performance.now() > soundDeadline) {
+    stats.soundsMissed++;
+    stats.missed++;
+    soundDue = false;
+    updateStats();
+    showFeedback("Sound missed", "#ff6d85");
+  }
+}
+
+function playTone() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+
+    if (!audioContext) audioContext = new AudioCtx();
+    if (audioContext.state === "suspended") audioContext.resume();
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = 880;
+    gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.16, audioContext.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.35);
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.36);
+  } catch (e) {
+    console.warn("Audio unavailable", e);
+  }
+}
+
+function respondToSound() {
+  if (!running || paused || finished || selectedGame !== "switch" || config.switchMode !== "divided") return;
+
+  if (soundDue) {
+    stats.soundsCorrect++;
+    stats.correct++;
+    stats.reactionTimes.push(performance.now() - lastSoundTime);
+    soundDue = false;
+    showFeedback("Sound detected", "#67f0b0");
+  } else {
+    stats.falseAlarms++;
+    showFeedback("No sound signal", "#ff6d85");
+  }
+
+  updateStats();
+}
+
+function togglePause() {
+  if (!running || finished) return;
+
+  paused = !paused;
+  document.getElementById("pauseButton").textContent = paused ? "Resume" : "Pause";
+  document.getElementById("instruction").textContent = paused ? "SESSION PAUSED" : "Continue training";
+}
+
+function restartGame() {
+  if (!config.duration) {
+    startGame();
+    return;
+  }
+
+  startGame();
+}
+
+function endGame() {
+  if (finished) return;
+
+  finished = true;
+  running = false;
+  paused = false;
+
+  if (timerInterval) clearInterval(timerInterval);
+
+  const avgRT = stats.reactionTimes.length
+    ? stats.reactionTimes.reduce((a,b) => a + b, 0) / stats.reactionTimes.length
+    : null;
+
+  const totalResponses = stats.correct + stats.falseAlarms;
+  const accuracy = totalResponses
+    ? Math.round((stats.correct / totalResponses) * 100)
+    : 0;
+
+  document.getElementById("gameScreen").style.display = "none";
+  document.getElementById("resultScreen").style.display = "block";
+
+  document.getElementById("resultCorrect").textContent = stats.correct;
+  document.getElementById("resultMissed").textContent = stats.missed;
+  document.getElementById("resultFalse").textContent = stats.falseAlarms;
+  document.getElementById("resultRT").textContent = avgRT ? (avgRT / 1000).toFixed(2) + " s" : "—";
+  document.getElementById("resultAccuracy").textContent =
+    "Response accuracy: " + accuracy + "% (correct responses divided by all recorded responses).";
+
+  document.getElementById("resultDescription").textContent =
+    "Exercise: " + document.getElementById("gameTitle").textContent +
+    " · Duration completed: " + formatDuration(sessionSeconds - remainingSeconds);
+
+  saveSession(avgRT, accuracy);
+
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+    animationId = null;
+  }
+}
+
+function formatDuration(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return m + " min " + s + " sec";
+}
+
+function saveSession(avgRT, accuracy) {
+  const records = JSON.parse(localStorage.getItem("neurofocusHistory") || "[]");
+
+  records.unshift({
+    date: new Date().toLocaleString(),
+    game: document.getElementById("gameTitle").textContent,
+    mode: selectedGame === "detective"
+      ? config.detectiveMode
+      : selectedGame === "switch" ? config.switchMode : "Standard",
+    difficulty: config.difficulty,
+    duration: formatDuration(sessionSeconds - remainingSeconds),
+    correct: stats.correct,
+    missed: stats.missed,
+    falseAlarms: stats.falseAlarms,
+    accuracy,
+    avgRT: avgRT ? (avgRT / 1000).toFixed(2) : "—"
+  });
+
+  localStorage.setItem("neurofocusHistory", JSON.stringify(records.slice(0, 50)));
+}
+
+function backHome() {
+  running = false;
+  paused = false;
+  finished = false;
+
+  if (timerInterval) clearInterval(timerInterval);
+  if (animationId) cancelAnimationFrame(animationId);
+  animationId = null;
+
+  document.getElementById("resultScreen").style.display = "none";
+  document.getElementById("gameScreen").style.display = "none";
+  document.getElementById("homeScreen").style.display = "block";
+}
+
+function toggleHistory() {
+  const panel = document.getElementById("historyPanel");
+  panel.style.display = panel.style.display === "none" ? "block" : "none";
+  renderHistory();
+}
+
+function renderHistory() {
+  const records = JSON.parse(localStorage.getItem("neurofocusHistory") || "[]");
+  const list = document.getElementById("historyList");
+
+  if (!records.length) {
+    list.innerHTML = "<p>No saved sessions yet.</p>";
+    return;
+  }
+
+  list.innerHTML = records.map(r => `
+    <div class="history-row">
+      <div>
+        <strong>${escapeHTML(r.game)}</strong><br>
+        <span style="color:#91a3c1">${escapeHTML(r.date)} · Level ${r.difficulty}</span><br>
+        <span style="color:#91a3c1">${escapeHTML(r.mode)} · ${escapeHTML(r.duration)}</span>
+      </div>
+      <div style="text-align:right">
+        <strong>${r.correct} correct</strong><br>
+        <span style="color:#91a3c1">${r.missed} missed · ${r.falseAlarms} false</span><br>
+        <span style="color:#45e5ff">${r.accuracy}% response accuracy</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[ch]));
+}
+
+function clearHistory() {
+  if (!confirm("Delete all saved session history from this browser?")) return;
+  localStorage.removeItem("neurofocusHistory");
+  renderHistory();
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
+  }
+}
+
+// Initial UI
+selectGame("hunter");
+updateTimer();
+
+</script>
+</body>
+</html>
