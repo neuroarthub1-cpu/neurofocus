@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,9 +31,7 @@ body {
   min-height: 100vh;
 }
 
-button, input, select {
-  font: inherit;
-}
+button, input, select { font: inherit; }
 
 button {
   cursor: pointer;
@@ -50,21 +47,9 @@ button {
 button:hover { filter: brightness(1.15); transform: translateY(-1px); }
 button:disabled { opacity: .4; cursor: not-allowed; transform: none; }
 
-button.secondary {
-  color: var(--text);
-  background: #23334f;
-  border: 1px solid #344765;
-}
-
-button.danger {
-  background: #54243a;
-  color: #ffdce5;
-}
-
-button.small {
-  padding: 8px 12px;
-  font-size: 13px;
-}
+button.secondary { color: var(--text); background: #23334f; border: 1px solid #344765; }
+button.danger { background: #54243a; color: #ffdce5; }
+button.small { padding: 8px 12px; font-size: 13px; }
 
 header {
   padding: 20px 28px;
@@ -76,20 +61,9 @@ header {
   gap: 12px;
 }
 
-.brand {
-  font-size: 23px;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
+.brand { font-size: 23px; font-weight: 800; letter-spacing: 1px; }
 .brand span { color: var(--cyan); }
-
-.subtitle {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 4px;
-  letter-spacing: 1.5px;
-}
+.subtitle { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 1.5px; }
 
 .header-tag {
   color: var(--cyan);
@@ -99,21 +73,13 @@ header {
   padding: 7px 12px;
 }
 
-main {
-  max-width: 1450px;
-  margin: auto;
-  padding: 24px;
-}
+main { max-width: 1450px; margin: auto; padding: 24px; }
 
 h1 { font-size: 28px; margin: 0 0 8px; }
 h2 { font-size: 19px; margin: 0 0 15px; }
 h3 { font-size: 15px; margin: 0 0 10px; }
 
-p {
-  color: var(--muted);
-  line-height: 1.5;
-  font-size: 14px;
-}
+p { color: var(--muted); line-height: 1.5; font-size: 14px; }
 
 .panel {
   background: var(--panel);
@@ -147,13 +113,7 @@ p {
   background: #0e1b30;
 }
 
-.game-number {
-  color: var(--cyan);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
+.game-number { color: var(--cyan); font-size: 12px; font-weight: 700; letter-spacing: 1px; }
 .game-card h3 { margin-top: 10px; font-size: 17px; }
 .game-card p { font-size: 13px; margin-bottom: 0; }
 
@@ -163,16 +123,9 @@ p {
   gap: 16px;
 }
 
-.field label {
-  display: block;
-  color: var(--muted);
-  font-size: 12px;
-  margin-bottom: 7px;
-}
+.field label { display: block; color: var(--muted); font-size: 12px; margin-bottom: 7px; }
 
-select, input[type="range"] {
-  width: 100%;
-}
+select, input[type="range"] { width: 100%; }
 
 select {
   color: var(--text);
@@ -184,25 +137,13 @@ select {
 
 input[type="range"] { accent-color: var(--cyan); }
 
-.range-value {
-  color: var(--cyan);
-  font-weight: 700;
-  font-size: 13px;
-  float: right;
-}
+.range-value { color: var(--cyan); font-weight: 700; font-size: 13px; float: right; }
 
-#modeFields {
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid #24344f;
-}
+.level-note { margin: 14px 0 0; font-size: 12px; }
 
-.actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
+#modeFields { margin-top: 18px; padding-top: 18px; border-top: 1px solid #24344f; }
+
+.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
 
 #gameScreen { display: none; }
 
@@ -215,11 +156,7 @@ input[type="range"] { accent-color: var(--cyan); }
   margin-bottom: 13px;
 }
 
-.stats {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+.stats { display: flex; gap: 10px; flex-wrap: wrap; }
 
 .stat {
   background: #111e34;
@@ -229,13 +166,7 @@ input[type="range"] { accent-color: var(--cyan); }
   min-width: 85px;
 }
 
-.stat small {
-  display: block;
-  color: var(--muted);
-  font-size: 10px;
-  margin-bottom: 4px;
-}
-
+.stat small { display: block; color: var(--muted); font-size: 10px; margin-bottom: 4px; }
 .stat strong { font-size: 17px; }
 
 #stage {
@@ -250,11 +181,7 @@ input[type="range"] { accent-color: var(--cyan); }
   touch-action: manipulation;
 }
 
-#stage canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+#stage canvas { display: block; width: 100%; height: 100%; }
 
 #instruction {
   position: absolute;
@@ -294,15 +221,9 @@ input[type="range"] { accent-color: var(--cyan); }
 
 .control-group { display: flex; gap: 9px; flex-wrap: wrap; }
 
-#soundButton {
-  display: none;
-  background: var(--orange);
-}
+#soundButton { display: none; background: var(--orange); }
 
-#resultScreen {
-  display: none;
-  margin-top: 20px;
-}
+#resultScreen { display: none; margin-top: 20px; }
 
 .result-grid {
   display: grid;
@@ -311,21 +232,11 @@ input[type="range"] { accent-color: var(--cyan); }
   margin: 20px 0;
 }
 
-.result-card {
-  background: #111e34;
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid #293d5b;
-}
-
+.result-card { background: #111e34; padding: 15px; border-radius: 10px; border: 1px solid #293d5b; }
 .result-card small { color: var(--muted); display: block; }
 .result-card strong { font-size: 23px; display: block; margin-top: 7px; }
 
-.history-list {
-  max-height: 250px;
-  overflow: auto;
-  margin-top: 12px;
-}
+.history-list { max-height: 250px; overflow: auto; margin-top: 12px; }
 
 .history-row {
   display: flex;
@@ -338,12 +249,7 @@ input[type="range"] { accent-color: var(--cyan); }
 
 .hidden { display: none !important; }
 
-footer {
-  text-align: center;
-  color: #657895;
-  font-size: 11px;
-  padding: 30px 15px;
-}
+footer { text-align: center; color: #657895; font-size: 11px; padding: 30px 15px; }
 
 @media(max-width: 850px) {
   .game-grid { grid-template-columns: 1fr; }
@@ -408,7 +314,8 @@ footer {
     <div class="settings">
       <div class="field">
         <label for="difficulty">Difficulty level</label>
-        <select id="difficulty">
+        <select id="difficulty" onchange="updateLevelNote()">
+          <option value="0">Level 0 – Baseline</option>
           <option value="1">Level 1 – Very Easy</option>
           <option value="2">Level 2 – Easy</option>
           <option value="3">Level 3 – Moderate</option>
@@ -453,7 +360,26 @@ footer {
         <input id="speed" type="range" min="1" max="8" value="4"
           oninput="document.getElementById('speedValue').textContent=this.value">
       </div>
+
+      <div class="field">
+        <label for="fieldMode">Visual field</label>
+        <select id="fieldMode">
+          <option value="peripheral">Peripheral (left + right thirds)</option>
+          <option value="central">Central (middle third)</option>
+          <option value="all" selected>Central + Peripheral</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="movementStyle">Object movement</label>
+        <select id="movementStyle">
+          <option value="3d" selected>3D movement (objects spin)</option>
+          <option value="2d">2D movement (no spinning)</option>
+        </select>
+      </div>
     </div>
+
+    <p class="level-note" id="levelNote"></p>
 
     <div id="modeFields">
       <div id="detectiveSettings" class="hidden">
@@ -588,14 +514,7 @@ let sessionSeconds = 0;
 let remainingSeconds = 0;
 let sessionStart = 0;
 
-let stats = {
-  correct: 0,
-  missed: 0,
-  falseAlarms: 0,
-  reactionTimes: [],
-  soundsCorrect: 0,
-  soundsMissed: 0
-};
+let stats = { correct: 0, missed: 0, falseAlarms: 0, reactionTimes: [], soundsCorrect: 0, soundsMissed: 0 };
 
 let config = {};
 let currentRule = "color";
@@ -606,17 +525,81 @@ let soundDeadline = 0;
 let lastSoundTime = 0;
 let audioContext = null;
 let feedbackTimeout = null;
+let sideSeed = 0;
 
-const COLORS = [
-  0x45e5ff,
-  0xa58bff,
-  0x67f0b0,
-  0xffb45e,
-  0xff6d85,
-  0x6b9dff
+/* ---------- Colours: solid primaries, no glow ---------- */
+const PALETTE = { red: 0xe02424, blue: 0x1e5bff, green: 0x16a34a, yellow: 0xffd60a };
+const CSS_COLORS = { red: "#ff4d4d", blue: "#4d8dff", green: "#22c55e", yellow: "#ffd60a" };
+const COLOR_KEYS = ["red", "blue", "green", "yellow"];
+
+const TARGET_COLOR_HUNT = "red";     // Target Hunter + Visual Detective target
+const TARGET_COLOR_DIVIDED = "yellow"; // Rule Switch (divided) target
+
+/* ---------- Camera / visual-field geometry ---------- */
+const FOV = 55;
+const CAM_Z = 17;
+const TAN_HALF = Math.tan((FOV / 2) * Math.PI / 180);
+
+// Zones are in normalised screen x (-1 = left edge, +1 = right edge).
+// Object CENTRES are kept inside each third with a margin so objects
+// do not cross into a neighbouring third.
+const ZONES = {
+  peripheral: [{ min: -0.92, max: -0.43 }, { min: 0.43, max: 0.92 }],
+  central:    [{ min: -0.24, max: 0.24 }],
+  all:        [{ min: -0.92, max: 0.92 }]
+};
+const Y_LIMIT = 0.72;
+
+const RULES = [
+  { type: "color", name: "RED OBJECTS",  key: "red" },
+  { type: "shape", name: "SPHERES",      shape: "sphere" },
+  { type: "color", name: "BLUE OBJECTS", key: "blue" },
+  { type: "shape", name: "CUBES",        shape: "box" }
 ];
 
-const COLOR_NAMES = ["cyan", "purple", "green", "orange", "pink", "blue"];
+const rand = (a, b) => a > b ? (a + b) / 2 : a + Math.random() * (b - a);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+// Reflect a value back into [lo, hi] (continuous motion, no sticking at edges)
+function bounce(v, lo, hi) {
+  if (hi <= lo) return (lo + hi) / 2;
+  const range = hi - lo;
+  const u = (((v - lo) % (2 * range)) + 2 * range) % (2 * range);
+  return lo + (u <= range ? u : 2 * range - u);
+}
+
+/* Background movement amplitudes (world units).
+   - Target Hunter: background is static; the target keeps its original drift.
+   - Other modes: range doubled vs. the original (0.7 / 0.45 / 0.35 -> x2),
+     and at higher levels the path grows (up to 2x more) and a second,
+     faster component is mixed in so motion becomes larger and more chaotic. */
+function motionAmps(obj) {
+  const d = obj.userData;
+  if (selectedGame === "hunter") {
+    if (!d.isTarget) return { x: 0, y: 0, z: 0, chaos: 0 };
+    return { x: 0.7, y: 0.45, z: 0.35, chaos: 0 };
+  }
+  const c = config.difficulty / 8;   // 0 at Level 0 ... 1 at Level 8
+  const S = 2 * (1 + c);             // x2 at Level 0, x4 at Level 8
+  return { x: 0.7 * S, y: 0.45 * S, z: 0.7, chaos: 0.6 * c };
+}
+const halfH = z => (CAM_Z - z) * TAN_HALF;
+const halfW = z => halfH(z) * camera.aspect;
+
+/* Level 0 = 1x (unchanged). Level 8 = 3x. Geometric steps: each level is
+   the same ratio (about +14.7%) faster than the one before. */
+function speedMultiplier(level) {
+  return level <= 0 ? 1 : Math.pow(3, level / 8);
+}
+
+function updateLevelNote() {
+  const level = Number(document.getElementById("difficulty").value);
+  const m = speedMultiplier(level);
+  document.getElementById("levelNote").textContent =
+    "Level " + level + ": movement speed ×" + m.toFixed(2) +
+    (level === 0 ? " (baseline, unchanged)" : "") +
+    " applied on top of the speed sliders (background and object movement).";
+}
 
 function selectGame(game) {
   selectedGame = game;
@@ -628,17 +611,9 @@ function selectGame(game) {
   document.getElementById("detectiveSettings").classList.toggle("hidden", game !== "detective");
   document.getElementById("switchSettings").classList.toggle("hidden", game !== "switch");
 
-  if (game === "hunter") {
-    document.getElementById("gameTitle").textContent = "Target Hunter";
-  }
-
-  if (game === "detective") {
-    document.getElementById("gameTitle").textContent = "Visual Detective";
-  }
-
-  if (game === "switch") {
-    document.getElementById("gameTitle").textContent = "Rule Switch";
-  }
+  if (game === "hunter") document.getElementById("gameTitle").textContent = "Target Hunter";
+  if (game === "detective") document.getElementById("gameTitle").textContent = "Visual Detective";
+  if (game === "switch") document.getElementById("gameTitle").textContent = "Rule Switch";
 }
 
 document.getElementById("switchMode").addEventListener("change", function() {
@@ -658,10 +633,13 @@ function readConfig() {
 
   return {
     difficulty,
+    speedMultiplier: speedMultiplier(difficulty),
     duration: Number(document.getElementById("duration").value) * 60,
     quantity: counts[quantity],
     targetScale: sizeScale[document.getElementById("targetSize").value],
     speed: Number(document.getElementById("speed").value),
+    fieldMode: document.getElementById("fieldMode").value,
+    movementStyle: document.getElementById("movementStyle").value,
     detectiveMode: document.getElementById("detectiveMode").value,
     targetSpeed: Number(document.getElementById("targetSpeed").value),
     backgroundSpeed: Number(document.getElementById("backgroundSpeed").value),
@@ -676,14 +654,7 @@ function startGame() {
   }
 
   config = readConfig();
-  stats = {
-    correct: 0,
-    missed: 0,
-    falseAlarms: 0,
-    reactionTimes: [],
-    soundsCorrect: 0,
-    soundsMissed: 0
-  };
+  stats = { correct: 0, missed: 0, falseAlarms: 0, reactionTimes: [], soundsCorrect: 0, soundsMissed: 0 };
 
   remainingSeconds = config.duration;
   sessionSeconds = config.duration;
@@ -695,6 +666,7 @@ function startGame() {
   ruleTimer = 0;
   soundDue = false;
   soundTimer = 0;
+  sideSeed = Math.random() < 0.5 ? 0 : 1;
 
   document.getElementById("homeScreen").style.display = "none";
   document.getElementById("resultScreen").style.display = "none";
@@ -711,6 +683,7 @@ function startGame() {
   createScene();
   createObjects();
   updateInstruction();
+  updateTimer();
 
   if (timerInterval) clearInterval(timerInterval);
 
@@ -751,8 +724,18 @@ function setupGameText() {
   }
 }
 
+function disposeObjects() {
+  objects.forEach(o => {
+    if (o.geometry) o.geometry.dispose();
+    if (o.material) o.material.dispose();
+  });
+  objects = [];
+}
+
 function createScene() {
   const stage = document.getElementById("stage");
+
+  disposeObjects();
 
   if (renderer) {
     renderer.dispose();
@@ -761,62 +744,27 @@ function createScene() {
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x030813);
-  scene.fog = new THREE.FogExp2(0x030813, 0.025);
 
   const width = stage.clientWidth;
   const height = stage.clientHeight;
 
-  camera = new THREE.PerspectiveCamera(55, width / height, 0.1, 100);
-  camera.position.set(0, 0, 17);
+  camera = new THREE.PerspectiveCamera(FOV, width / height, 0.1, 100);
+  camera.position.set(0, 0, CAM_Z);
   camera.lookAt(0, 0, 0);
 
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setSize(width, height);
-  renderer.outputEncoding = THREE.sRGBEncoding;
   stage.insertBefore(renderer.domElement, stage.firstChild);
 
   raycaster = new THREE.Raycaster();
   pointer = new THREE.Vector2();
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.85));
-
-  const light1 = new THREE.PointLight(0x45e5ff, 1.7, 35);
-  light1.position.set(-6, 5, 8);
-  scene.add(light1);
-
-  const light2 = new THREE.PointLight(0x8d6aff, 1.4, 35);
-  light2.position.set(6, -5, 5);
-  scene.add(light2);
-
-  // Subtle star field
-  const starGeometry = new THREE.BufferGeometry();
-  const starPositions = [];
-
-  for (let i = 0; i < 500; i++) {
-    starPositions.push(
-      (Math.random() - 0.5) * 45,
-      (Math.random() - 0.5) * 30,
-      (Math.random() - 0.5) * 18
-    );
-  }
-
-  starGeometry.setAttribute(
-    "position",
-    new THREE.Float32BufferAttribute(starPositions, 3)
-  );
-
-  const stars = new THREE.Points(
-    starGeometry,
-    new THREE.PointsMaterial({
-      color: 0x607da8,
-      size: 0.035,
-      transparent: true,
-      opacity: 0.65
-    })
-  );
-
-  scene.add(stars);
+  // Neutral white lighting only: no coloured lights, no emissive glow
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  const sun = new THREE.DirectionalLight(0xffffff, 0.45);
+  sun.position.set(3, 5, 8);
+  scene.add(sun);
 
   window.addEventListener("resize", resizeScene);
   renderer.domElement.addEventListener("pointerdown", handlePointer);
@@ -848,63 +796,141 @@ function randomShape() {
   return shapes[Math.floor(Math.random() * shapes.length)];
 }
 
+function setObjectColor(obj, key) {
+  obj.material.color.setHex(PALETTE[key]);
+  obj.userData.colorKey = key;
+}
+
+function setObjectShape(obj, shape) {
+  obj.geometry.dispose();
+  obj.geometry = makeGeometry(shape, obj.userData.size);
+  obj.userData.shape = shape;
+}
+
+/* ---------- Placement within the selected visual field ---------- */
+
+function zoneForIndex(index) {
+  const zones = ZONES[config.fieldMode];
+  if (zones.length === 1) return zones[0];
+  if (index === undefined) return zones[Math.floor(Math.random() * 2)];
+  return zones[(index + sideSeed) % 2];
+}
+
+function placeRegular(obj, zone) {
+  const d = obj.userData;
+  const a = motionAmps(obj);
+  const zDeep = 2.5 + a.z; // deepest/nearest z reached incl. drift, used for safe margins
+  const padX = (a.x * (1 + a.chaos)) / halfW(zDeep);
+  const padY = (a.y * (1 + a.chaos)) / halfH(zDeep);
+  const others = objects.filter(o => o !== obj);
+
+  let best = null;
+  let bestScore = -1;
+
+  // Best-of-N candidate sampling keeps objects reasonably spread out
+  for (let k = 0; k < 25; k++) {
+    const z = (Math.random() - 0.5) * 5;
+    const nx = rand(zone.min + padX, zone.max - padX);
+    const ny = rand(-Y_LIMIT + padY, Y_LIMIT - padY);
+    const x = nx * halfW(z);
+    const y = ny * halfH(z);
+
+    let score = Infinity;
+    for (const o of others) {
+      score = Math.min(score, Math.hypot(o.position.x - x, o.position.y - y));
+    }
+
+    if (score > bestScore) { bestScore = score; best = { nx, ny, z }; }
+    if (score === Infinity) break;
+  }
+
+  d.mode = "regular";
+  d.zone = zone;
+  d.baseNx = best.nx;
+  d.baseNy = best.ny;
+  d.baseZ = best.z;
+  obj.position.set(best.nx * halfW(best.z), best.ny * halfH(best.z), best.z);
+}
+
+function placeMovingTarget(obj) {
+  const d = obj.userData;
+  const zone = zoneForIndex(undefined);
+  const hwMin = halfW(1.5);
+  const hhMin = halfH(1.5);
+
+  // Original sweep amplitudes (5 x 2.5), reduced only if the zone is narrower
+  const ax = Math.min(5, ((zone.max - zone.min) / 2) * hwMin * 0.95);
+  const ay = Math.min(2.5, Y_LIMIT * hhMin * 0.95);
+  const padX = ax / hwMin;
+  const padY = ay / hhMin;
+
+  d.mode = "moving";
+  d.zone = zone;
+  d.cx = rand(zone.min + padX, zone.max - padX);
+  d.cy = rand(-Y_LIMIT + padY, Y_LIMIT - padY);
+  d.ax = ax;
+  d.ay = ay;
+  obj.position.set(d.cx * halfW(0), d.cy * halfH(0), 0);
+}
+
+function placeStationary(obj) {
+  const d = obj.userData;
+  let nx = 0; // centre of screen, as in the original
+
+  if (config.fieldMode === "peripheral") {
+    const zone = zoneForIndex(undefined);
+    nx = (zone.min + zone.max) / 2;
+  }
+
+  d.mode = "stationary";
+  d.anchorNx = nx;
+  d.zone = ZONES[config.fieldMode][0];
+  obj.position.set(nx * halfW(0), 0, 0);
+}
+
+function placeObject(obj, index) {
+  if (selectedGame === "detective" && obj.userData.isTarget) {
+    if (config.detectiveMode === "moving") placeMovingTarget(obj);
+    else placeStationary(obj);
+    return;
+  }
+  placeRegular(obj, zoneForIndex(index));
+}
+
 function createOneObject(index, isTarget = false) {
-  const shapes = randomShape();
+  const shape = randomShape();
   const baseSize = isTarget ? 0.65 : 0.48;
   const size = baseSize * config.targetScale;
 
-  let color;
+  let colorKey;
 
   if (selectedGame === "switch" && config.switchMode === "alternating") {
-    color = isTarget ? 0x45e5ff : COLORS[Math.floor(Math.random() * COLORS.length)];
-  } else if (selectedGame === "switch" && config.switchMode === "divided") {
-    color = isTarget ? 0xffb45e : COLORS[Math.floor(Math.random() * COLORS.length)];
+    colorKey = COLOR_KEYS[Math.floor(Math.random() * COLOR_KEYS.length)];
   } else {
-    color = isTarget ? 0x45e5ff : COLORS[Math.floor(Math.random() * COLORS.length)];
+    const targetKey = selectedGame === "switch" ? TARGET_COLOR_DIVIDED : TARGET_COLOR_HUNT;
+    const distractors = COLOR_KEYS.filter(k => k !== targetKey);
+    colorKey = isTarget ? targetKey : distractors[Math.floor(Math.random() * distractors.length)];
   }
 
-  const material = new THREE.MeshStandardMaterial({
-    color,
-    emissive: color,
-    emissiveIntensity: isTarget ? 0.75 : 0.38,
-    roughness: 0.32,
-    metalness: 0.28
-  });
-
-  const mesh = new THREE.Mesh(makeGeometry(shapes, size), material);
-
-  mesh.position.set(
-    (Math.random() - 0.5) * 13,
-    (Math.random() - 0.5) * 8,
-    (Math.random() - 0.5) * 5
-  );
+  // Flat, solid colour: no emissive term, no glow ring
+  const material = new THREE.MeshLambertMaterial({ color: PALETTE[colorKey] });
+  const mesh = new THREE.Mesh(makeGeometry(shape, size), material);
 
   mesh.userData = {
     isTarget,
-    shape: shapes,
-    color,
-    baseX: mesh.position.x,
-    baseY: mesh.position.y,
-    baseZ: mesh.position.z,
+    shape,
+    size,
+    colorKey,
     phase: Math.random() * Math.PI * 2,
+    phase2: Math.random() * Math.PI * 2,
+    phase3: Math.random() * Math.PI * 2,
+    f2: 2 + Math.random() * 1.5,
+    f3: 1.7 + Math.random() * 1.5,
     rotationSpeed: (Math.random() - 0.5) * 1.5,
-    moveX: (Math.random() - 0.5),
-    moveY: (Math.random() - 0.5),
-    targetBorn: performance.now(),
-    targetSpeed: config.targetSpeed
+    targetBorn: performance.now()
   };
 
-  if (isTarget) {
-    const ring = new THREE.Mesh(
-      new THREE.TorusGeometry(size * 1.3, 0.045, 10, 36),
-      new THREE.MeshBasicMaterial({
-        color: 0x9ff5ff,
-        transparent: true,
-        opacity: 0.85
-      })
-    );
-    mesh.add(ring);
-  }
+  placeObject(mesh, index);
 
   scene.add(mesh);
   objects.push(mesh);
@@ -914,86 +940,72 @@ function createOneObject(index, isTarget = false) {
 function createObjects() {
   objects = [];
 
-  const count = config.quantity;
-  const target = createOneObject(0, true);
+  const alternating = selectedGame === "switch" && config.switchMode === "alternating";
 
-  if (selectedGame === "detective" && config.detectiveMode === "stationary") {
-    target.position.set(0, 0, 0);
-    target.userData.baseX = 0;
-    target.userData.baseY = 0;
-  }
+  // In alternating mode targets are defined by the rule, not by a pre-marked object
+  createOneObject(0, !alternating);
 
-  for (let i = 1; i < count; i++) {
+  for (let i = 1; i < config.quantity; i++) {
     createOneObject(i, false);
   }
 
-  if (selectedGame === "switch" && config.switchMode === "alternating") {
-    applyRule();
-  }
+  if (alternating) applyRule();
+}
+
+function colorTag(text, key) {
+  return '<span style="color:' + CSS_COLORS[key] + '">' + text + '</span>';
 }
 
 function updateInstruction() {
   const instruction = document.getElementById("instruction");
 
   if (selectedGame === "hunter") {
-    instruction.innerHTML = 'Find the <span style="color:#45e5ff">glowing cyan target</span>';
+    instruction.innerHTML = "Find the " + colorTag("red target", TARGET_COLOR_HUNT);
   } else if (selectedGame === "detective") {
-    instruction.innerHTML = 'Locate the <span style="color:#45e5ff">glowing target</span>';
+    instruction.innerHTML = "Locate the " + colorTag("red target", TARGET_COLOR_HUNT);
   } else if (config.switchMode === "alternating") {
     applyRule();
   } else {
-    instruction.innerHTML = 'Tap the <span style="color:#ffb45e">orange target</span> and respond to the sound';
+    instruction.innerHTML = "Tap the " + colorTag("yellow target", TARGET_COLOR_DIVIDED) + " and respond to the sound";
   }
+}
+
+function currentRuleObject() {
+  return RULES[Math.floor(ruleTimer / 12) % RULES.length];
+}
+
+function matchesRule(obj, rule) {
+  return rule.type === "color"
+    ? obj.userData.colorKey === rule.key
+    : obj.userData.shape === rule.shape;
 }
 
 function applyRule() {
   if (selectedGame !== "switch" || config.switchMode !== "alternating") return;
 
-  const rules = [
-    { type: "color", name: "CYAN OBJECTS", color: 0x45e5ff },
-    { type: "shape", name: "SPHERES", shape: "sphere" },
-    { type: "color", name: "PURPLE OBJECTS", color: 0xa58bff },
-    { type: "shape", name: "CUBES", shape: "box" }
-  ];
+  const rule = currentRuleObject();
+  currentRule = rule.type;
 
-  const ruleIndex = Math.floor(ruleTimer / 12) % rules.length;
-  currentRule = rules[ruleIndex].type;
-  const rule = rules[ruleIndex];
+  // Guarantee at least one valid target exists for the active rule
+  if (objects.length && !objects.some(o => matchesRule(o, rule))) {
+    const o = objects[Math.floor(Math.random() * objects.length)];
+    if (rule.type === "color") setObjectColor(o, rule.key);
+    else setObjectShape(o, rule.shape);
+    o.userData.targetBorn = performance.now();
+  }
 
-  document.getElementById("instruction").innerHTML =
-    'CURRENT RULE: <span style="color:#45e5ff">' + rule.name + '</span>';
+  const label = rule.type === "color" ? colorTag(rule.name, rule.key) : colorTag(rule.name, "yellow");
+  document.getElementById("instruction").innerHTML = "CURRENT RULE: " + label;
 
   objects.forEach(obj => {
-    const isMatch = rule.type === "color"
-      ? obj.userData.color === rule.color
-      : obj.userData.shape === rule.shape;
-
-    obj.userData.isTarget = isMatch;
-    obj.material.emissiveIntensity = isMatch ? 0.85 : 0.25;
+    obj.userData.isTarget = matchesRule(obj, rule);
   });
 }
 
 function isCorrectTarget(obj) {
-  if (selectedGame === "hunter" || selectedGame === "detective") {
-    return obj.userData.isTarget;
-  }
-
   if (selectedGame === "switch" && config.switchMode === "alternating") {
-    const rules = [
-      { type: "color", color: 0x45e5ff },
-      { type: "shape", shape: "sphere" },
-      { type: "color", color: 0xa58bff },
-      { type: "shape", shape: "box" }
-    ];
-
-    const ruleIndex = Math.floor(ruleTimer / 12) % rules.length;
-    const rule = rules[ruleIndex];
-
-    return rule.type === "color"
-      ? obj.userData.color === rule.color
-      : obj.userData.shape === rule.shape;
+    return matchesRule(obj, currentRuleObject());
   }
-
   return obj.userData.isTarget;
 }
 
@@ -1005,13 +1017,43 @@ function handlePointer(event) {
   pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
   pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
+  // 1) Exact surface hit always wins (e.g. a small object seen through a ring)
   raycaster.setFromCamera(pointer, camera);
   const hits = raycaster.intersectObjects(objects, false);
 
-  if (!hits.length) return;
+  if (hits.length) {
+    processResponse(hits[0].object);
+    return;
+  }
 
-  const object = hits[0].object;
-  processResponse(object);
+  // 2) Otherwise accept a click inside any shape's bounding circle (+ small
+  //    margin), so the empty centre of a ring or a near-miss still registers
+  const PAD = 8; // px
+  const px = event.clientX - rect.left;
+  const py = event.clientY - rect.top;
+  let best = null;
+  let bestScore = Infinity;
+  const v = new THREE.Vector3();
+
+  objects.forEach(obj => {
+    if (!obj.geometry.boundingSphere) obj.geometry.computeBoundingSphere();
+
+    const worldR = obj.geometry.boundingSphere.radius * obj.scale.x;
+    const depth = CAM_Z - obj.position.z;
+    const pxR = (worldR / (depth * TAN_HALF)) * (rect.height / 2) + PAD;
+
+    v.copy(obj.position).project(camera);
+    const sx = (v.x * 0.5 + 0.5) * rect.width;
+    const sy = (-v.y * 0.5 + 0.5) * rect.height;
+    const dist = Math.hypot(px - sx, py - sy);
+
+    if (dist <= pxR && dist / pxR < bestScore) {
+      bestScore = dist / pxR;
+      best = obj;
+    }
+  });
+
+  if (best) processResponse(best);
 }
 
 function processResponse(obj) {
@@ -1034,15 +1076,7 @@ function processResponse(obj) {
 }
 
 function relocateObject(obj) {
-  obj.position.set(
-    (Math.random() - 0.5) * 13,
-    (Math.random() - 0.5) * 8,
-    (Math.random() - 0.5) * 5
-  );
-
-  obj.userData.baseX = obj.position.x;
-  obj.userData.baseY = obj.position.y;
-  obj.userData.baseZ = obj.position.z;
+  placeObject(obj, undefined);
   obj.userData.targetBorn = performance.now();
 
   if (selectedGame === "switch" && config.switchMode === "alternating") {
@@ -1089,50 +1123,63 @@ function animate(now = performance.now()) {
 }
 
 function updateObjects(delta, now) {
-  const baseSpeed = config.speed * 0.045;
+  const m = config.speedMultiplier;               // Level 0 = 1x ... Level 8 = 3x
+  const baseSpeed = config.speed * 0.045 * m;
+  const spin = config.movementStyle === "3d";
 
   objects.forEach(obj => {
-    const data = obj.userData;
+    const d = obj.userData;
 
-    obj.rotation.x += delta * data.rotationSpeed;
-    obj.rotation.y += delta * data.rotationSpeed * 0.7;
+    if (spin) {
+      obj.rotation.x += delta * d.rotationSpeed;
+      obj.rotation.y += delta * d.rotationSpeed * 0.7;
+    }
 
-    const isMovingTarget =
-      data.isTarget &&
-      selectedGame === "detective" &&
-      config.detectiveMode === "moving";
-
-    const isStationaryTarget =
-      data.isTarget &&
-      selectedGame === "detective" &&
-      config.detectiveMode === "stationary";
-
-    if (isStationaryTarget) {
-      obj.position.x = 0;
-      obj.position.y = 0;
+    if (d.mode === "stationary") {
+      obj.position.set(d.anchorNx * halfW(0), 0, 0);
       return;
     }
 
-    if (isMovingTarget) {
-      const speed = config.targetSpeed * 0.07;
+    if (d.mode === "moving") {
+      const speed = config.targetSpeed * 0.07 * m;
       const t = now * 0.001 * speed;
-      obj.position.x = Math.sin(t + data.phase) * 5;
-      obj.position.y = Math.cos(t * 0.75 + data.phase) * 2.5;
-      obj.position.z = Math.sin(t * 0.45) * 1.5;
+      const z = Math.sin(t * 0.45) * 1.5;
+      obj.position.set(
+        d.cx * halfW(z) + Math.sin(t + d.phase) * d.ax,
+        d.cy * halfH(z) + Math.cos(t * 0.75 + d.phase) * d.ay,
+        z
+      );
     } else {
-      const backgroundSpeed =
-        selectedGame === "detective"
-          ? config.backgroundSpeed * 0.055
-          : baseSpeed;
+      const a = motionAmps(obj);
 
-      const t = now * 0.001 * backgroundSpeed;
+      // Target Hunter background: fixed in place (spin still follows the 2D/3D setting)
+      if (a.x === 0 && a.y === 0 && a.z === 0) {
+        obj.position.set(d.baseNx * halfW(d.baseZ), d.baseNy * halfH(d.baseZ), d.baseZ);
+        obj.scale.setScalar(1);
+        return;
+      }
 
-      obj.position.x = data.baseX + Math.sin(t + data.phase) * 0.7;
-      obj.position.y = data.baseY + Math.cos(t * 0.8 + data.phase) * 0.45;
-      obj.position.z = data.baseZ + Math.sin(t * 0.5 + data.phase) * 0.35;
+      const bgSpeed = selectedGame === "detective"
+        ? config.backgroundSpeed * 0.055 * m
+        : baseSpeed;
+
+      const t = now * 0.001 * bgSpeed;
+      const z = d.baseZ + Math.sin(t * 0.5 + d.phase) * a.z;
+      const hw = halfW(z);
+      const hh = halfH(z);
+
+      const x = d.baseNx * hw + a.x * (Math.sin(t + d.phase) + a.chaos * Math.sin(t * d.f2 + d.phase2));
+      const y = d.baseNy * hh + a.y * (Math.cos(t * 0.8 + d.phase) + a.chaos * Math.cos(t * d.f3 + d.phase3));
+
+      // Reflect off the zone edges so motion stays inside the selected visual field
+      obj.position.set(
+        bounce(x, d.zone.min * hw, d.zone.max * hw),
+        bounce(y, -Y_LIMIT * hh, Y_LIMIT * hh),
+        z
+      );
     }
 
-    const pulse = 1 + Math.sin(now * 0.002 + data.phase) * 0.035;
+    const pulse = 1 + Math.sin(now * 0.002 + d.phase) * 0.035;
     obj.scale.setScalar(pulse);
   });
 }
@@ -1240,15 +1287,15 @@ function togglePause() {
 
   paused = !paused;
   document.getElementById("pauseButton").textContent = paused ? "Resume" : "Pause";
-  document.getElementById("instruction").textContent = paused ? "SESSION PAUSED" : "Continue training";
+
+  if (paused) {
+    document.getElementById("instruction").textContent = "SESSION PAUSED";
+  } else {
+    updateInstruction(); // restore the target/rule instruction instead of generic text
+  }
 }
 
 function restartGame() {
-  if (!config.duration) {
-    startGame();
-    return;
-  }
-
   startGame();
 }
 
@@ -1262,7 +1309,7 @@ function endGame() {
   if (timerInterval) clearInterval(timerInterval);
 
   const avgRT = stats.reactionTimes.length
-    ? stats.reactionTimes.reduce((a,b) => a + b, 0) / stats.reactionTimes.length
+    ? stats.reactionTimes.reduce((a, b) => a + b, 0) / stats.reactionTimes.length
     : null;
 
   const totalResponses = stats.correct + stats.falseAlarms;
@@ -1299,6 +1346,7 @@ function formatDuration(seconds) {
 }
 
 function saveSession(avgRT, accuracy) {
+  const fieldLabels = { peripheral: "Peripheral", central: "Central", all: "Central + Peripheral" };
   const records = JSON.parse(localStorage.getItem("neurofocusHistory") || "[]");
 
   records.unshift({
@@ -1308,6 +1356,8 @@ function saveSession(avgRT, accuracy) {
       ? config.detectiveMode
       : selectedGame === "switch" ? config.switchMode : "Standard",
     difficulty: config.difficulty,
+    field: fieldLabels[config.fieldMode],
+    movement: config.movementStyle === "2d" ? "2D" : "3D",
     duration: formatDuration(sessionSeconds - remainingSeconds),
     correct: stats.correct,
     missed: stats.missed,
@@ -1352,8 +1402,8 @@ function renderHistory() {
     <div class="history-row">
       <div>
         <strong>${escapeHTML(r.game)}</strong><br>
-        <span style="color:#91a3c1">${escapeHTML(r.date)} · Level ${r.difficulty}</span><br>
-        <span style="color:#91a3c1">${escapeHTML(r.mode)} · ${escapeHTML(r.duration)}</span>
+        <span style="color:#91a3c1">${escapeHTML(r.date)} · Level ${escapeHTML(r.difficulty)}</span><br>
+        <span style="color:#91a3c1">${escapeHTML(r.mode)} · ${escapeHTML(r.duration)}${r.field ? " · " + escapeHTML(r.field) + " · " + escapeHTML(r.movement) : ""}</span>
       </div>
       <div style="text-align:right">
         <strong>${r.correct} correct</strong><br>
@@ -1391,6 +1441,7 @@ function toggleFullscreen() {
 // Initial UI
 selectGame("hunter");
 updateTimer();
+updateLevelNote();
 
 </script>
 </body>
